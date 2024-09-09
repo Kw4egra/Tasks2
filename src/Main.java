@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class Main {
     // Задача 1
@@ -48,9 +51,9 @@ public class Main {
     // Реализуйте функцию, которая находит корень из числа.
     // Если число отрицательное, выбрасывайте IllegalArgumentException.
 
-    public static double ReturnSqrt(int a) throws Exception {
+    public static double ReturnSqrts(int a, int b) throws Exception {
         if (a < 0) throw new IllegalArgumentException("Корень из отрицательного числа");
-        return Math.sqrt(a);
+        return Math.pow(a,1.0/b);
     }
 
     // Задача 6
@@ -128,8 +131,91 @@ public class Main {
         if (a%2 == 0) return true;
         else return false;
     }
-    public static void main(String[] args) throws Exception {
+
+    // Задача 13 Чтение элемента списка
+    // Напишите функцию, которая возвращает элемент списка по индексу. Если индекс выходит за пределы списка, выбрасывайте IndexOutOfBoundsException.
+
+    public  static int IndArr(int[] a,int b) throws Exception {
+        if (b > a.length-1) throw new IndexOutOfBoundsException("Индекс находиться вне массива");
+        return a[b];
+    }
+
+    // Задача 14 Парольная проверка
+    // Создайте функцию для проверки сложности пароля. Если пароль содержит менее 8 символов, выбрасывайте исключение WeakPasswordException.
+
+    public static class WeakPasswordException extends Throwable {
+        public WeakPasswordException(String mes) {
+            super(mes);
+        }
+    }
+
+    public static boolean ChekPassword(String password) throws WeakPasswordException {
+        if (password.length() < 8) throw new WeakPasswordException("Короткий пароль");
+        return true;
+    }
+
+    // Задача 15 Проверка даты
+    // Напишите функцию, которая проверяет, является ли строка корректной датой в формате "dd.MM.yyyy".
+    // Если формат неверен, выбрасывайте DateTimeParseException.
+
+    public static boolean ChekDate(String date) throws Exception {
+        try {
+            LocalDate localDate = LocalDate.of(Integer.parseInt(date.substring(6, 10)), Integer.parseInt(date.substring(3, 5)), Integer.parseInt(date.substring(0, 2))
+            );
+        }
+        catch (DateTimeParseException e)
+        {
+            throw new DateTimeParseException("Неверный формат даты",date, 0);
+        }
+        return true;
+    }
+
+    // Задача 16 Конкатенация строк
+    // Реализуйте функцию, которая объединяет две строки.
+    // Если одна из строк равна null, выбрасывайте NullPointerException.
+
+    public static String ConcString(String a, String b) throws Exception{
+        if (a == null || b == null) throw new NullPointerException("Строка равна null");
+        return a + b;
+    }
+
+    // Задача 17 Остаток от деления
+    // Создайте функцию, которая возвращает остаток от деления двух чисел. Если второе число равно нулю, выбрасывайте исключение.
+
+    public static int DivideOst(int a, int b) throws Exception {
+        if (b == 0) throw new Exception("Деление на ноль");
+        return a%b;
+    }
+
+    // Задача 18 Квадратный корень
+    // Реализуйте функцию, которая находит квадратный корень числа. Если число отрицательное, выбрасывайте исключение.
+
+    public static double ReturnSqrt(int a) throws Exception {
+        if (a < 0) throw new IllegalArgumentException("Корень из отрицательного числа");
+        return Math.sqrt(a);
+    }
+
+    // Задача 19 Конвертер температуры
+    // Напишите функцию, которая переводит температуру из Цельсия в Фаренгейт. Если температура меньше абсолютного нуля, выбрасывайте исключение.
+
+    public static double CInF (double C) throws Exception{
+        if (C < -273.15) throw new Exception("Температура меньше абсолютного нуля");
+        return (C + 273.15);
+    }
+
+    // Задача 20 Проверка строки на пустоту
+    // Создайте функцию, которая проверяет, является ли строка пустой или null.
+    // Если строка пустая или равна null, выбрасывайте исключение.
+
+    public static boolean EmptyString (String a) throws Exception {
+        if (a == null || a == "") throw new Exception("Строка пуста");
+        return true;
+    }
+
+    public static void main(String[] args) throws Exception, WeakPasswordException {
         int[] a = {1,2,3,4,5};
-        System.out.println(NumDivide(3,0));
+        String b = "adswasds";
+        String c = "24.12.2004";
+        System.out.println(EmptyString(""));
     }
 }
